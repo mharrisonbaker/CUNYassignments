@@ -1,0 +1,62 @@
+---
+title: "MHB_DATA607_assignment1"
+author: "Matthew Baker"
+date: "February 2, 2019"
+output: html_document
+---
+
+##import data file into dataframe
+```{r}
+mushdat = read.csv("https://archive.ics.uci.edu/ml/machine-learning-databases/mushroom/agaricus-lepiota.data", header = TRUE)
+```
+
+##check column names
+```{r}
+names(mushdat)
+```
+
+##rename columns
+```{r}
+names(mushdat) <- c("classes", "capshape", "capsurface", "capcolor", "bruises", "odor", "gillattachment", "gillspacing", "gillsize", "gillcolor", "stalkshape", "stalkroot", "stalksurfaceabovering", "stalksurfacebelowring", "stalkcolorabovering", "stalkcolorbelowring", "veiltype", "veilcolor", "ringnumber", "ringtype", "sporeprintcolor", "population", "habitat")
+```
+
+##convert table to characters
+```{r}
+mushdat[] <- lapply(mushdat, as.character)
+```
+
+##rename table values
+```{r}
+mushdat$classes[mushdat$classes == "e"] <- "edible"
+mushdat$classes[mushdat$classes == "p"] <- "poisonous"
+mushdat$capshape[mushdat$capshape == "b"] <- "bell"
+mushdat$capshape[mushdat$capshape == "c"] <- "conical"
+mushdat$capshape[mushdat$capshape== "x"] <- "convex"
+mushdat$capshape[mushdat$capshape== "f"] <- "flat"
+mushdat$capshape[mushdat$capshape== "k"] <- "knobbed"
+mushdat$capshape[mushdat$capshape== "s"] <- "sunken"
+mushdat$capsurface[mushdat$capsurface== "f"] <- "fibrous"
+mushdat$capsurface[mushdat$capsurface== "g"] <- "grooves"
+mushdat$capsurface[mushdat$capsurface== "y"] <- "scaly"
+mushdat$capsurface[mushdat$capsurface== "s"] <- "smooth"
+mushdat$capcolor[mushdat$capcolor== "n"] <- "brown"
+mushdat$capcolor[mushdat$capcolor== "b"] <- "buff"
+mushdat$capcolor[mushdat$capcolor== "c"] <- "cinnamon"
+mushdat$capcolor[mushdat$capcolor== "g"] <- "gray"
+mushdat$capcolor[mushdat$capcolor== "r"] <- "green"
+mushdat$capcolor[mushdat$capcolor== "p"] <- "pink"
+mushdat$capcolor[mushdat$capcolor== "u"] <- "purple"
+mushdat$capcolor[mushdat$capcolor== "e"] <- "red"
+mushdat$capcolor[mushdat$capcolor== "w"] <- "white"
+mushdat$capcolor[mushdat$capcolor== "y"] <- "yellow"
+mushdat$bruises[mushdat$bruises== "t"] <- "bruises"
+mushdat$bruises[mushdat$bruises== "f"] <- "no"
+```
+
+##show subset of columns
+```{r}
+head(mushdat[1:5], 50)
+```
+
+
+
