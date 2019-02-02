@@ -5,9 +5,9 @@ date: "February 2, 2019"
 output: html_document
 ---
 
-##import data file into dataframe
+##import raw github data file into dataframe
 ```{r}
-mushdat = read.csv("https://archive.ics.uci.edu/ml/machine-learning-databases/mushroom/agaricus-lepiota.data", header = TRUE)
+mushdat = read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/agaricus-lepiota.csv", header = TRUE)
 ```
 
 ##check column names
