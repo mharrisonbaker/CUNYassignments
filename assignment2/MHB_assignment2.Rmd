@@ -15,6 +15,8 @@ library(RMySQL)
 mydb = dbConnect(MySQL(), user='matt', password='cunymsds1!', dbname='moviereview', host='localhost')
 ```
 
+
+##list tables and fields
 ```{r}
 dbListTables(mydb)
 dbListFields(mydb, 'movie')
@@ -22,7 +24,7 @@ dbListFields(mydb, 'rating')
 dbListFields(mydb, 'reviewer')
 ```
 
-
+##read tables
 ```{r}
 dfmovie<-dbReadTable(mydb, 'movie')
 dfmovie
@@ -34,7 +36,7 @@ dfreviewer<-dbReadTable(mydb, 'reviewer')
 dfreviewer
 ```
 
-
+##do some SQL style table merging
 ```{R}
 dfm1<-merge(x=dfrating,y=dfmovie,by="mID",all=TRUE)
 dfm1
@@ -45,6 +47,8 @@ dfm2<-merge(x=dfm1,y=dfreviewer,by="rID",all=TRUE)
 dfm2
 ```
 
+
+##summary of ratings
 ```{r}
 summary(dfm2)
 ```
