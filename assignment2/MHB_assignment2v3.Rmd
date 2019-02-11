@@ -1,0 +1,61 @@
+---
+title: "MHB_DATA607_assignment2"
+author: "Matthew Baker"
+date: "February 5, 2019"
+output: html_document
+---
+
+
+##include libraries
+```{r}
+library(RMySQL)
+```
+
+
+##connect to the GCP mySQL instance 
+```{r}
+mydb = dbConnect(MySQL(), user='cunygrader', password='cunyrules', dbname='moviesdb', host='35.239.118.183')
+```
+
+##check to see the tables and their fields 
+```{r}
+#find and print table names
+table_names<-dbListTables(mydb)
+table_names
+#find and print table fields
+table_fields<-lapply(table_names, dbListFields , conn = mydb)
+table_fields
+```
+
+##dataframes
+```{r}
+#generate data frames from sql tables
+dfmovie<-dbReadTable(mydb, 'movie')
+dfmovie
+
+dfrating<-dbReadTable(mydb, 'rating')
+dfrating
+
+dfreviewer<-dbReadTable(mydb, 'reviewer')
+dfreviewer
+```
+
+##merge dataframes in R
+```{R}
+dfm1<-merge(x=dfrating,y=dfmovie,by="mID",all=TRUE)
+dfm1
+```
+
+```{r}
+dfm2<-merge(x=dfm1,y=dfreviewer,by="rID",all=TRUE)
+dfm2
+```
+
+##summary of the ratings 
+```{r}
+summary(dfm2)
+```
+
+```{r}
+dbDisconnect(mydb)
+```
