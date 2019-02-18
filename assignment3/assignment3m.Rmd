@@ -1,0 +1,122 @@
+---
+title: "assignment3"
+author: "Matthew Baker"
+date: "February 17, 2019"
+output: html_document
+---
+
+#include library
+library(stringr)
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(stringr)
+
+#raw data
+raw.data <- "555-1239Moe Szyslak(636) 555-0113Burns, C. Montgomery555-6542Rev. Timothy Lovejoy555 8904Ned Flanders636-555-3226Simpson, Homer5553642Dr. Julius Hibbert"
+
+#extract only names
+name <- unlist(str_extract_all(raw.data, "[[:alpha:]., ]{2,}"))
+name
+
+#extract phonenumbers
+phone <- unlist(str_extract_all(raw.data, "\\(?(\\d{3})?\\)?(-| )?\\d{3}(-| )?\\d{4}"))
+phone
+
+df <- data.frame(name = name, phone = phone)
+```
+
+#3-1
+```{r}
+orderedname <- sub("(.+)\\,\\s+(.+)","\\2 \\1", name)
+orderedname
+df31<- data.frame(name, orderedname)
+```
+
+##ordered names
+```{r}
+df31 
+```
+
+##3-2
+```{r}
+titles <- c("[A-Z]{1}[a-z]{1,}\\.")
+matchtitles <- grepl(titles, name)
+matchtitles
+df32 <- data.frame(name, matchtitles)
+```
+
+##Does the character have a title
+```{r}
+df32
+```
+
+
+#3-3
+```{r}
+orderedname2 <- orderedname
+secondname<-c("[A-Z]{1}[a-z]{0}\\.")
+matchsecond<- grepl(secondname, orderedname2)
+matchsecond
+df33 <- data.frame(orderedname2, matchsecond)
+```
+
+##names with a second name
+```{r}
+df33
+```
+
+
+#4-1
+#Number matched at least one time followed by $
+```{r}
+r1 <- c("[0-9]+\\$")
+v1 <-c("1$", "222$", "0123456789$", "abc$", "123", "12#", "ab$")
+grepl(r1, v1)
+```
+
+#4-2
+##set of 1-4 letters
+```{r}
+r2 <- c("\\b[a-z]{1,4}\\b")
+v2<-c("a", "abcd", "1234" , "abcde")
+grepl(r2,v2)
+```
+
+#4-3
+##any string followed by ".txt"
+```{r}
+r3<-c(".*?\\.txt$")
+v3<-c("123.txt", "abc.txt", "123", "abc")
+grepl(r3,v3)
+```
+
+#4-4
+##2 digits forward slash 2 digits forward slash 4 digits
+```{r}
+r4<-c("\\d{2}/\\d{2}/\\d{4}")
+v4 <- c("07/04/1776", "02/17/2019", "1/12/1234", "01/02/123")
+grepl(r4, v4)
+```
+
+#4-5
+##Backreference to match the same text inside angle brackets again with added forward slash
+```{r}
+r5<-c("<(.+?)>.+?</\\1>")
+v5 <- c("<ABC>xxxyyyzzz</ABC>", "<ABC>xxxyyyzzz<ABC>", "ABCxxxyyyzzzABC")
+grepl(r5, v5)
+```
+
+#9
+##cracking code one class as a time
+```{r}
+msg<-paste("clcopCow1zmstc0d87wnkig7OvdicpNuggvhryn92Gjuwczi8hqrfpRxs5Aj5dwpn0TanwoUwisdij7Lj8kpf03AT5Idr3coc0bt7yczjatOaootj55t3Nj3ne6c4Sfek.r1w1YwwojigOd6vrfUrbz2.2bkAnbhzgv4R9i05zEcrop.wAgnb.SqoU65fPa1otfb7wEm24k6t3sR9zqe5fy89n6Nd5t9kc4fE905gmc4Rgxo5nhDk!gr")
+msg2 <- gsub(pattern = "[[:digit:]]", replacement = "", msg)
+msg3 <- gsub(pattern = "[[:lower:]]", replacement = "", msg2)
+msg4 <- gsub(pattern = "\\.", replacement = " ", msg3)
+msg4
+```
