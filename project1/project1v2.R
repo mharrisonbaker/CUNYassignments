@@ -1,7 +1,7 @@
 library(tidyverse)
 
 
-chesstextread<-readLines("tournamentinfo.txt")
+chesstextread<-readLines("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/project1/tournamentinfo.txt")
 chesstext<-chesstextread[-(1:4)]
 chesstext2<- chesstext[seq(1, length(chesstext), 3)]
 chesstext2
@@ -9,9 +9,6 @@ chesstext2
 #chessdf <- data.frame("Player's Name", "Player's State", "Total Number of Points", "Player's Pre-Rating", "Average Pre Chess Rating of Opponents")
 chessdf <- data.frame()
 
-testplayerline<-c("-----------------------------------------------------------------------------------------
-                  1 | GARY HUA                        |6.0  |W  39|W  21|W  18|W  14|W   7|D  12|D   4|
-                  ON | 15445895 / R: 1794   ->1817     |N:2  |W    |B    |W    |B    |W    |B    |W    |")
 
 #make a player number vector
 playernumber<-c(1:64)
@@ -40,7 +37,7 @@ tpoints <- as.numeric(gsub("\\|", "", tpoints))
 tpoints
 
 #chessdf with variables so far
-chessdf <- data.frame(playernumber,name, state, prerating, tpoints)
+chessdf <- data.frame(name, state, prerating, tpoints)
 chessdf
 chessdf <- as_tibble(chessdf)
 chessdf
@@ -94,5 +91,9 @@ oppratingdf %>%
 
 
 chessdf$avgopprating<- oppratingdf3$means
+chessdf$avgopprating %>% 
+    mutate(recode = as.numeric(factor(avgopprating))) -> chessdf
 print(tbl_df(chessdf), n=64)
+
+chessdf %>% write.csv(.,file = "C:/Users/Matt/Documents/CUNY/DATA/PROJECT1/chessoutput.csv")
   
