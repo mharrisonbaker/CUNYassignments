@@ -1,0 +1,116 @@
+---
+title: "DATA607_assigment5"
+author: "Matthew Baker"
+date: "March 2, 2019"
+output: html_document
+---
+
+##include libraries
+```{r}
+library(knitr)
+library(kableExtra)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+#import data file into dataframe
+```{r}
+flightdf = read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/assignment5/flightontime.csv")
+flightdf %>% gather(city, delay, Los.Angeles:Seattle)
+```
+
+#filter for delayed flights
+```{r}
+flightdf %>% filter(Schedule=="delayed") %>% arrange(Airline) -> flightdelaysdf
+kable(flightdelaysdf) %>% kable_styling()
+```
+
+#See how many flights each airline completes on time and delayed to each city.  Am West has more flights total, mostly to Phoenix.
+```{r}
+flightdf%>%mutate(TotalFlights = rowSums(.[3:7])) -> flightdf
+kable(flightdf) %>% kable_styling()
+```
+
+
+##calculate on time percentage for each airline by city
+```{r}
+#on time rate AK
+flightdf %>% filter(Airline=="ALASKA") %>% arrange(Airline) -> flightdelaysdfAK
+AKotr <- flightdelaysdfAK[1,3:7]/(flightdelaysdfAK[1,3:7]+flightdelaysdfAK[2,3:7])
+
+#on time rate AW
+flightdf %>% filter(Airline=="AM WEST") %>% arrange(Airline) -> flightdelaysdfAW
+AWotr <- flightdelaysdfAW[1,3:7]/(flightdelaysdfAW[1,3:7]+flightdelaysdfAW[2,3:7])
+
+#on time percentage, here the table is made long
+otr<-rbind(AKotr, AWotr)
+otr$Airline<-c("ALASKA", "AM WEST")
+otr %>% gather(city, OnTimePercentage, Los.Angeles:Seattle) %>% arrange(OnTimePercentage) -> otr
+kable(otr) %>% kable_styling()
+```
+
+##Am West is doing the worst of all data points in San Fran (foggy).  Phoenix is the best city for on time arrivals (nice weather). Alaksa Airlines has a better on time percentage in every city.
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+
+```{r}
+#calculation for histograms below
+longdelays<-flightdelaysdf %>% gather(city, delay, Los.Angeles:Seattle)
+```
+
+
+##I made these histograms but they shouldn't really be compared by airline, as each airline flies a different total amount of flights and these don't account for total amount of flights per city.  I left them in but would not consider them effective for comparative analysis.
+
+## histogram of Alaska Airways delays
+```{r, echo=FALSE}
+#histogram of ak delays(good)
+AKdelay <- longdelays %>% filter(Airline=="ALASKA")
+AKhist<-hist(AKdelay$delay, main = "Histogram of Alaska Airlines Delays", xlab = "Minutes", ylab = "# in bin")
+AKhist
+```
+
+## histogram of American West Airlines delays
+```{r, echo=FALSE}
+#histogram of aw delays (good)
+AWdelay <- longdelays %>% filter(Airline=="AM WEST")
+AWhist<-hist(AWdelay$delay, main ="Histogram of American West Airlines Delays", xlab = "Minutes", ylab = "# in bin")
+AWhist
+```
+
+
+##
+```{r}
+#delay stats per airline(good)
+AKdelay2 <- longdelays %>% filter(Airline=="ALASKA") %>% summarise(max(delay), min(delay), mean(delay), sd(delay), median(delay), IQR(delay))
+AWdelay2 <- longdelays %>% filter(Airline=="AM WEST") %>% summarise(max(delay), min(delay), mean(delay), sd(delay), median(delay), IQR(delay))
+AKdelay2
+AWdelay2
+delaystatsdf <-rbind(AKdelay2, AWdelay2)
+airnames <- c("ALAKSA", "AM WEST")
+delaystatsdf$names<-airnames
+```
+
+Here is a table of relevant delay stats by airline.  Alaska is superior in all categories.
+```{r}
+#max, min, mean etc per city
+kable(delaystatsdf[,c("names", "mean(delay)",  "median(delay)", "max(delay)", "min(delay)")]) %>% kable_styling()
+```
