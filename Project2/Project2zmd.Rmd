@@ -1,0 +1,45 @@
+---
+title: "Project2Zillow"
+author: "Matthew Baker"
+date: "March 9, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyr)
+library(dplyr)
+```
+
+
+```{r}
+#read in each file
+zfile <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/zillowdata.csv", header = TRUE)
+```
+
+```{r}
+#select interesting columns
+zdata<-zfile
+monthnames<-c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+names(zdata)[3:14]<-monthnames
+head(zdata)
+```
+
+```{r}
+zdataL<-zdata %>% gather(Month, MedValue, Jan:Dec)
+head(zdataL)
+zdataL %>% filter(SizeRank<10) -> zdatatop 
+head(zdatatop)
+```
+
+```{r}
+zdatatop %>% select(RegionName, Month, MedValue) %>% group_by(RegionName) %>% mutate(MedValue == max(MedValue)) %>% ungroup() ->bestmonth
+```
+
+```{r}
+bestmonth  <- bestmonth %>% rename(bestmonth=`MedValue == max(MedValue)`)
+bestmonth %>% arrange(desc(bestmonth))
+```

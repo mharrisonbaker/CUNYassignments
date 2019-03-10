@@ -1,0 +1,80 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(knitr)
+```
+
+```{r}
+#read in each file
+fifadata <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/fifa19data.csv", header = TRUE, encoding="UTF-8")
+```
+
+```{r}
+#select interesting columns
+fifa19<-fifadata
+fifa19 <- select(fifa19, ID, Name, Age, Nationality, Value, Wage, Preferred.Foot)
+```
+
+
+```{r}
+#take the first 175 rows for analysis purposes
+fifa19 <- fifa19[1:75,]
+head(fifa19)
+```
+
+
+#digits only and numeric wages
+```{r}
+
+digitsonly2<-("[[:digit:]]+\\.*[[:digit:]]*")
+playervalue<-unlist(str_extract_all(fifa19$Value, digitsonly2))
+playerwage<-unlist(str_extract_all(fifa19$Wage, digitsonly2))
+
+fifa19[,"Value"] <-playervalue
+fifa19[,"Value"] <- as.numeric(fifa19[,"Value"])*1000000
+
+fifa19[,"Wage"] <-playerwage
+fifa19[,"Wage"] <- as.numeric(playerwage)*1000
+
+```
+
+
+#histogram of age
+```{r}
+agehist<-hist(fifa19$Age, main ="Histogram of age", xlab = "age", ylab = "# in bin")
+agehist
+```
+
+#more valuable as right or left foot?  ...right by a bit
+```{r}
+#more valuable as right or left foot?
+fifa19 %>% filter(Preferred.Foot == "Left") ->fifa19L
+mean(fifa19L[,"Value"], na.rm=TRUE) -> L
+
+fifa19 %>% filter(Preferred.Foot == "Right") ->fifa19R
+mean(fifa19R[,"Value"], na.rm=TRUE) -> R
+
+L>R
+```
+
+#top young players that need a better agent (these wage numbers are wrong from source, i think)
+```{r}
+fifa19 %>% filter(fifa19$Age < 26) %>% mutate(AmIGettingPaid = Value/Wage) ->fifa19young
+fifa19young %>% arrange(AmIGettingPaid)
+```
+
+
+

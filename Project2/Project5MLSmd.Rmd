@@ -1,0 +1,122 @@
+---
+title: "Project2a"
+author: "Matthew Baker"
+date: "March 9, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+###include libraries
+```{r}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+```
+
+###read in each file
+```{r}
+mls07 <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/mls-salaries-2007.csv")
+mls08 <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/mls-salaries-2008.csv")
+mls09 <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/mls-salaries-2009.csv")
+mls10 <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/mls-salaries-2010.csv")
+mls11 <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/mls-salaries-2011.csv")
+mls12 <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/mls-salaries-2012.csv")
+mls13 <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/mls-salaries-2013.csv")
+mls14 <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/mls-salaries-2014.csv")
+mls15 <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/mls-salaries-2015.csv")
+mls16 <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/mls-salaries-2016.csv")
+mls17 <- read.csv("https://raw.githubusercontent.com/mharrisonbaker/CUNYassignments/master/Project2/mls-salaries-2017.csv")
+```
+
+###add a year column (easier to do this first)
+```{r}
+mls07$year <-2007
+mls08$year <-2008
+mls09$year <-2009
+mls10$year <-2010
+mls11$year <-2011
+mls12$year <-2012
+mls13$year <-2013
+mls14$year <-2014
+mls15$year <-2015
+mls16$year <-2016
+mls17$year <-2017
+```
+
+#data prep and cleaning
+```{r}
+#combine all tables into single table
+mlssalary <- rbind(mls07,mls08,mls09, mls10, mls11, mls12, mls13, mls14, mls15, mls16, mls17)
+
+#5553 rows
+dim(mlssalary)
+
+#combine first and last names 
+mlssalary$Name<-paste(mlssalary$first_name, mlssalary$last_name)
+
+#remove players without clubs
+mlssalary<-mlssalary[!(is.na(mlssalary$club) | mlssalary$club=="" | mlssalary$club=="POOL" | mlssalary$club=="Pool" | mlssalary$club=="None"), ]
+
+#check to see removals
+dim(mlssalary)
+```
+
+#basic yearly stats
+```{r}
+mlssalary %>% 
+    group_by(year) %>% 
+    summarise(max(base_salary, na.rm = TRUE), min(base_salary, na.rm = TRUE), mean(base_salary, na.rm = TRUE), sd(base_salary, na.rm = TRUE), median(base_salary, na.rm = TRUE), IQR(base_salary, na.rm = TRUE)) -> yearlymlsstats
+
+kable(yearlymlsstats) %>% kable_styling()
+```
+
+
+#team payroll by year, showing top 15 most expensive teams in league history 
+```{r}
+
+mlssalary %>% group_by(club, year) %>% summarize(sum(base_salary, na.rm = TRUE)) -> yearlyteampayroll
+yearlyteampayroll <- rename(yearlyteampayroll, "avgsalary" = "sum(base_salary, na.rm = TRUE)")
+yearlyteampayroll <- yearlyteampayroll %>% arrange(desc(avgsalary))
+kable(head(yearlyteampayroll, 15)) %>% kable_styling()
+```
+
+#plotting the yearly payroll of the 9 remaining original teams, LA consistently a big spender
+```{r}
+
+originalsyearlyteampayroll <- yearlyteampayroll %>% filter(grepl("COL|CLB|DC|DAL|KC|LA|NE|^NY$|SJ", club))
+ggplot(originalsyearlyteampayroll,aes(x=factor(year),y=avgsalary,colour=club,group=club)) + geom_line()
+```
+
+##check for outliers
+```{r, warning = FALSE}
+#start with a plot to visualize things and see if outliers will effect stats
+#looks like there are a good number of outliers
+p <- ggplot(mlssalary, aes(x=factor(year), y=base_salary))+
+  geom_point()
+p
+```
+ 
+```{r}
+##boxplot shows how far out the outliers are
+e <- ggplot(mlssalary, aes(x=factor(year), y=base_salary))
+e + geom_boxplot()
+```
+
+
+ 
+```{r}
+#avg yearly salaries for entire league 
+mlssalary %>% group_by(year) %>% dplyr::summarize(Mean = mean(base_salary, na.rm = TRUE)) -> avgyearlysalary
+avgyearlysalary
+```
+
+```{r}
+#avg yearly salaries for the league minus the super high earners
+mlssalary %>% filter(base_salary<1000000) -> mlssalarynorm
+mlssalarynorm %>% group_by(year) %>% dplyr::summarize(Mean = mean(base_salary, na.rm = TRUE)) -> avgyearlysalarynorm
+avgyearlysalarynorm
+```
