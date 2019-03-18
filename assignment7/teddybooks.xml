@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<RECORDS>
+	<BOOK>
+		<ID>0</ID>
+		<ISBN-10>671447548</ISBN-10>
+		<Title>Mornings on Horseback: The Story of an Extraordinary Faimly, a Vanished Way of Life and the Unique Child Who Became Theodore Roosevelt</Title>
+		<Authors>
+			<value>David McCullough </value>
+		</Authors>
+		<Year>1982</Year>
+		<Publisher>Simon and Schuster</Publisher>
+		
+	</BOOK>
+	<BOOK>
+		<ID>1</ID>
+		<ISBN-10>375756787</ISBN-10>
+		<Title>The Rise of Theodore Roosevelt</Title>
+		<Authors>
+			<value>Edmund Morris </value>
+		</Authors>
+		<Year>2001</Year>
+		<Publisher>Random House</Publisher>
+	</BOOK>
+	<BOOK>
+		<ID>2</ID>
+		<ISBN-10>9780805069068</ISBN-10>
+		<Title>Theodore Roosevelt: The American Presidents Series: The 26th President, 1901-1909</Title>
+		<Authors>
+			<value>Louis Auchincloss </value>
+			<value>Arthur M. Schlesinger </value>
+		</Authors>
+		<Year>2002</Year>
+		<Publisher>Times Books</Publisher>
+		
+	</BOOK>
+</RECORDS>
