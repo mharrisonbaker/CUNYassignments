@@ -1,0 +1,69 @@
+---
+title: "Week 11 Discussion: Recommender Systems"
+author: "Matthew Baker"
+date: "April 10, 2019"
+output: html_document 
+number_sections: TRUE
+theme: sandstone
+highlight: tango
+---
+
+
+
+##Example: Stack Overflow
+
+###Target Users?
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+I think every student in this class has likely used StackOverflow dot com when working on a DATA 607 assignment.  A search engine query with programming terms will often generate a Stack Overflow page as one of the top 10 results, but often the answer is not found in that result.
+
+</div>
+
+
+###What are their key goals?
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+Stack Overflow users are programmers looking to solve their own problems and help others by answering forum posts. Users' key goals are to gain understanding about a variety of programming problems.  
+
+</div>
+
+
+###How can you help them accomplish those goals?
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+Stack Overflow uses a numbers of approaches to help users find answers.  Forums use an upvoting system, allows user tagging, user profiles, and displays "Related" questions on the webpage (based on similarity to other forum posts).    
+
+</div>
+
+
+###Attempt to reverse engineer the Stack Overflow site
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+Unfortunately, using the developer view in Firefox did not shed any light on how the Related Questions links are chosen.  The links point directly to the related question.    
+
+</div>
+
+###Academic Papers
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+This academic paper mentions that Stack Overflow indeed makes a dataset available, but does not explain a reverse engineering of the Related questions recommender.
+
+[Social Media Recommender Systems: Review and Open Research Issues](https://ieeexplore.ieee.org/document/8303693 "Social Media Recommender Systems: Review and Open Research Issues")
+
+
+</div>
