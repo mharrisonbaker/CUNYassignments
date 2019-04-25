@@ -2,7 +2,8 @@ library("neo4r")
 library("RMySQL")
 library("magrittr")
 
-##connect to a GCP mySQL instance 
+##connect to a GCP mySQL instance
+##if you use user='cunygrader', password='cunyrules' and professor Catlin's IP address from week2 it should login to this host
 mydbcon = dbConnect(MySQL(), user='matt', password='cunymsds1!', dbname='moviesdb', host='35.239.118.183')
 
 
