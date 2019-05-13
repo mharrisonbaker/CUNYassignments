@@ -1,0 +1,145 @@
+{
+	"version": 2,
+	"locations": [{
+		"id": "16",
+		"geo": {
+			"name": "Amsterdam",
+			"country": {
+				"id": "nl",
+				"name": "Netherlands"
+			},
+			"latitude": 52.373,
+			"longitude": 4.894
+		},
+		"astronomy": {
+			"objects": [{
+				"name": "sun",
+				"days": [{
+					"date": "2013-10-01",
+					"events": [],
+					"daylength": "11:36"
+				},{
+					"date": "2013-10-02",
+					"events": [],
+					"daylength": "11:32"
+				},{
+					"date": "2013-10-03",
+					"events": [],
+					"daylength": "11:28"
+				},{
+					"date": "2013-10-04",
+					"events": [],
+					"daylength": "11:24"
+				},{
+					"date": "2013-10-05",
+					"events": [],
+					"daylength": "11:20"
+				},{
+					"date": "2013-10-06",
+					"events": [],
+					"daylength": "11:16"
+				},{
+					"date": "2013-10-07",
+					"events": [],
+					"daylength": "11:12"
+				},{
+					"date": "2013-10-08",
+					"events": [],
+					"daylength": "11:08"
+				},{
+					"date": "2013-10-09",
+					"events": [],
+					"daylength": "11:04"
+				},{
+					"date": "2013-10-10",
+					"events": [],
+					"daylength": "11:00"
+				},{
+					"date": "2013-10-11",
+					"events": [],
+					"daylength": "10:56"
+				},{
+					"date": "2013-10-12",
+					"events": [],
+					"daylength": "10:52"
+				},{
+					"date": "2013-10-13",
+					"events": [],
+					"daylength": "10:48"
+				},{
+					"date": "2013-10-14",
+					"events": [],
+					"daylength": "10:44"
+				},{
+					"date": "2013-10-15",
+					"events": [],
+					"daylength": "10:40"
+				},{
+					"date": "2013-10-16",
+					"events": [],
+					"daylength": "10:36"
+				},{
+					"date": "2013-10-17",
+					"events": [],
+					"daylength": "10:32"
+				},{
+					"date": "2013-10-18",
+					"events": [],
+					"daylength": "10:28"
+				},{
+					"date": "2013-10-19",
+					"events": [],
+					"daylength": "10:24"
+				},{
+					"date": "2013-10-20",
+					"events": [],
+					"daylength": "10:20"
+				},{
+					"date": "2013-10-21",
+					"events": [],
+					"daylength": "10:16"
+				},{
+					"date": "2013-10-22",
+					"events": [],
+					"daylength": "10:12"
+				},{
+					"date": "2013-10-23",
+					"events": [],
+					"daylength": "10:08"
+				},{
+					"date": "2013-10-24",
+					"events": [],
+					"daylength": "10:05"
+				},{
+					"date": "2013-10-25",
+					"events": [],
+					"daylength": "10:01"
+				},{
+					"date": "2013-10-26",
+					"events": [],
+					"daylength": "09:57"
+				},{
+					"date": "2013-10-27",
+					"events": [],
+					"daylength": "09:53"
+				},{
+					"date": "2013-10-28",
+					"events": [],
+					"daylength": "09:49"
+				},{
+					"date": "2013-10-29",
+					"events": [],
+					"daylength": "09:46"
+				},{
+					"date": "2013-10-30",
+					"events": [],
+					"daylength": "09:42"
+				},{
+					"date": "2013-10-31",
+					"events": [],
+					"daylength": "09:38"
+				}]
+			}]
+		}
+	}]
+}

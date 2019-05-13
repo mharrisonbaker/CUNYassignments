@@ -1,0 +1,145 @@
+{
+	"version": 2,
+	"locations": [{
+		"id": "16",
+		"geo": {
+			"name": "Amsterdam",
+			"country": {
+				"id": "nl",
+				"name": "Netherlands"
+			},
+			"latitude": 52.373,
+			"longitude": 4.894
+		},
+		"astronomy": {
+			"objects": [{
+				"name": "sun",
+				"days": [{
+					"date": "2013-05-01",
+					"events": [],
+					"daylength": "14:57"
+				},{
+					"date": "2013-05-02",
+					"events": [],
+					"daylength": "15:01"
+				},{
+					"date": "2013-05-03",
+					"events": [],
+					"daylength": "15:04"
+				},{
+					"date": "2013-05-04",
+					"events": [],
+					"daylength": "15:08"
+				},{
+					"date": "2013-05-05",
+					"events": [],
+					"daylength": "15:11"
+				},{
+					"date": "2013-05-06",
+					"events": [],
+					"daylength": "15:15"
+				},{
+					"date": "2013-05-07",
+					"events": [],
+					"daylength": "15:18"
+				},{
+					"date": "2013-05-08",
+					"events": [],
+					"daylength": "15:22"
+				},{
+					"date": "2013-05-09",
+					"events": [],
+					"daylength": "15:25"
+				},{
+					"date": "2013-05-10",
+					"events": [],
+					"daylength": "15:29"
+				},{
+					"date": "2013-05-11",
+					"events": [],
+					"daylength": "15:32"
+				},{
+					"date": "2013-05-12",
+					"events": [],
+					"daylength": "15:35"
+				},{
+					"date": "2013-05-13",
+					"events": [],
+					"daylength": "15:38"
+				},{
+					"date": "2013-05-14",
+					"events": [],
+					"daylength": "15:42"
+				},{
+					"date": "2013-05-15",
+					"events": [],
+					"daylength": "15:45"
+				},{
+					"date": "2013-05-16",
+					"events": [],
+					"daylength": "15:48"
+				},{
+					"date": "2013-05-17",
+					"events": [],
+					"daylength": "15:51"
+				},{
+					"date": "2013-05-18",
+					"events": [],
+					"daylength": "15:54"
+				},{
+					"date": "2013-05-19",
+					"events": [],
+					"daylength": "15:57"
+				},{
+					"date": "2013-05-20",
+					"events": [],
+					"daylength": "16:00"
+				},{
+					"date": "2013-05-21",
+					"events": [],
+					"daylength": "16:02"
+				},{
+					"date": "2013-05-22",
+					"events": [],
+					"daylength": "16:05"
+				},{
+					"date": "2013-05-23",
+					"events": [],
+					"daylength": "16:08"
+				},{
+					"date": "2013-05-24",
+					"events": [],
+					"daylength": "16:10"
+				},{
+					"date": "2013-05-25",
+					"events": [],
+					"daylength": "16:13"
+				},{
+					"date": "2013-05-26",
+					"events": [],
+					"daylength": "16:15"
+				},{
+					"date": "2013-05-27",
+					"events": [],
+					"daylength": "16:18"
+				},{
+					"date": "2013-05-28",
+					"events": [],
+					"daylength": "16:20"
+				},{
+					"date": "2013-05-29",
+					"events": [],
+					"daylength": "16:22"
+				},{
+					"date": "2013-05-30",
+					"events": [],
+					"daylength": "16:24"
+				},{
+					"date": "2013-05-31",
+					"events": [],
+					"daylength": "16:26"
+				}]
+			}]
+		}
+	}]
+}
